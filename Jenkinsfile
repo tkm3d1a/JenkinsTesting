@@ -4,7 +4,7 @@ pipeline{
         maven "maven_3_9_6"
     }
     stages{
-        stage("Maven"){
+        stage("Maven - Install"){
             steps{
                 bat "mvn -version"
                 bat "mvn clean install"
@@ -15,6 +15,22 @@ pipeline{
             steps{
                 bat "docker build -t tkm3d1a/jenkins-test ."
             }
+        }
+
+        stage("Docker - Push"){
+            steps{
+                script{
+                    withCredentials([usernamePassword(credentialsId: 'docker-login', passwordVariable: 'dockerPassword', usernameVariable: 'dockerUsername')]){
+                        bat "docker login -u %dockerUsername% -p %dockerPassword%"
+                        bat "docker push tkm3d1a/jenkins-test"
+                    }
+                }
+            }
+        }
+    }
+    post{
+        always{
+            cleanWs()
         }
     }
 }
