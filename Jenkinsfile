@@ -13,7 +13,7 @@ pipeline{
 
         stage("Docker - Build"){
             steps{
-                bat "docker build -t tkm3d1a/jenkins-test ."
+                bat "docker build -t tkm3d1a/jenkins-test:1.0.0 ."
             }
         }
 
