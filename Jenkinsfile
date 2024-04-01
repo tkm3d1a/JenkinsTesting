@@ -2,7 +2,7 @@ pipeline{
     agent any
     tools{
         maven "maven_3_9_6"
-        docker "docker_latest"
+        dockerTool "docker_latest"
     }
     stages{
         stage("Maven"){
