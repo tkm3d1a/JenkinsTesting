@@ -2,7 +2,6 @@ pipeline{
     agent any
     tools{
         maven "maven_3_9_6"
-        dockerTool "docker_latest"
     }
     stages{
         stage("Maven"){
@@ -14,7 +13,7 @@ pipeline{
 
         stage("Docker - Build"){
             steps{
-                bat "docker version"
+                bat "docker build -t tkm3d1a/jenkins-test ."
             }
         }
     }
