@@ -13,7 +13,7 @@ pipeline{
 
         stage("Docker - Build"){
             steps{
-                bat "docker build -t tkm3d1a/jenkins-test:1.0.0 ."
+                bat "docker build -t tkm3d1a/jenkins-test:1.0.1 ."
             }
         }
 
@@ -22,7 +22,7 @@ pipeline{
                 script{
                     withCredentials([usernamePassword(credentialsId: 'docker-login', passwordVariable: 'dockerPassword', usernameVariable: 'dockerUsername')]){
                         bat "docker login -u %dockerUsername% -p %dockerPassword%"
-                        bat "docker push tkm3d1a/jenkins-test"
+                        bat "docker push tkm3d1a/jenkins-test:1.0.1"
                     }
                 }
             }
